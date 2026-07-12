@@ -17,7 +17,7 @@ def read_root():
         conn=psycopg2.connect(host=DB_HOST, database=DB_NAME, password=DB_PASSWORD,
                               user=DB_USER,)
         conn.close()
-        db_status = "Успішно підключено до PostgreSQL!)"
+        db_status = "Успішно підключено до PostgreSQL!)))"
     except Exception as e:
         db_status = f"Помилка підключення до БД: {str(e)}"
     return {
