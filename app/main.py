@@ -6,6 +6,8 @@ from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from pathlib import Path
+
 
 load_dotenv()
 
@@ -13,7 +15,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 app = FastAPI(title="FastAPI Pet UI ")
 
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="/app/templates")
 
 
 def get_db():
@@ -34,8 +36,9 @@ async def read_root(request: Request, db=Depends(get_db)):
         db_status = f"ERROR: {str(e)}"
 
     return templates.TemplateResponse(
-        "index.html", 
-        {"request": request, "db_status": db_status}
+        name="index.html", 
+        request=request,
+        context={"status": db_status}
     )
 
 

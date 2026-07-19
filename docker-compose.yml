@@ -13,9 +13,10 @@ services:
   web:
     build:
       context: .
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-    volumes:
-      - .:/app
+      dockerfile: app/Dockerfile
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - .env
     expose:
       - "8000"
     depends_on:
